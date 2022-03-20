@@ -27,28 +27,6 @@ export default class {
 
     }
 
-    static async updateGateway(gateway: Gateway): Promise<boolean> {
-        const stmt = `UPDATE gateways SET name = ?, ipaddress= ? WHERE id = ?;`
-        try {
-            await dao.run(stmt, [gateway.name, gateway.ipaddress]);
-            return true;
-        } catch (err) {
-            console.error(err);
-            return false;
-        }
-    }
-
-    static async deleteGateway(gatewaySerialNumber: number) {
-        const stmt = `DELETE FROM gateways WHERE sn = ?;`
-        try {
-            await dao.run(stmt, [gatewaySerialNumber]);
-            return true;
-        } catch (err) {
-            console.error(err);
-            return false;
-        }
-    }
-
     /*DEVICE OPERATIONS*/
     static async createDevice(device: Device, gatewaySerialNumber): Promise<boolean> {
         const stmt = `INSERT INTO devices (vendor, date_created, device_uid, gateway_sn) VALUES (?,?,?,?);`
@@ -74,7 +52,7 @@ export default class {
     }
 
     static async getAllGatewayDevices(sn: number): Promise<Device[]> {
-        const devices = await dao.get(`SELECT * FROM devices WHERE gateway_sn = ?`, [sn])
+        const devices = await dao.all(`SELECT * FROM devices WHERE gateway_sn = ?`, [sn])
         return <Device[]>devices
     }
 }

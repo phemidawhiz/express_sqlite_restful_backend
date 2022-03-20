@@ -45,7 +45,7 @@ export default class {
             const err: Error = new Error("Gateway serial number is required.");
             return next(err)
         }
-        let devices = await repo.getAllGatewayDevices(req.params.sn)
+        let devices = await repo.getAllGatewayDevices(Number(req.params.sn))
         return res.send({ devices: devices });
     };
     static async createDevice(req: Request, res: Response, next: Function) {
