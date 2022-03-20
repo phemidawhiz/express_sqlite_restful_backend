@@ -3,11 +3,6 @@
 
 # Get Started
 
-## Required Environment Variables:
-```
-APP_SECRET=
-```
-
 ## Install and Run:
 
 With npm:
@@ -15,6 +10,14 @@ With npm:
 ```
 npm install
 npm run dev
+```
+
+## Run test:
+
+With npm:
+
+```
+npm run test
 ```
 
 <br/>
@@ -69,7 +72,7 @@ The request body should be like this:
 
 To get all gateway devices send a GET request to `/api/gateway/devices/{gateway_sn}`.
 
-To delete a gateway device send a DELETE request to `/api/gateway/{sn}/{uid}`.
+To delete a gateway device send a DELETE request to `/api/gateway/{gateway_sn}/{device_uid}`.
 
 ## Unit Tests
 
