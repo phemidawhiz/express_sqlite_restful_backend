@@ -1,7 +1,9 @@
 import repo from '../repositories/gateway.repository';
+// @ts-ignore
 import { Request, Response } from 'express'
 import Gateway from '../models/gateway';
 import Device from '../models/devices';
+// @ts-ignore
 import { v4 as uuidv4 } from 'uuid';
 
 export default class {
@@ -28,15 +30,6 @@ export default class {
         const newGateway = new Gateway(req.body.name, req.body.ipaddress);
         const success = await repo.createGateway(newGateway);
         return res.send({ success, gateway: newGateway });
-    }
-
-    static async updateGateway(req: Request, res: Response, next: Function) {
-        if (!req.body.id || !req.body.name || !req.body.ipaddress) {
-            const err: Error = new Error("Gateway name and ipaddress are required.");
-            return next(err)
-        }
-        let success = await repo.updateGateway(req.body);
-        return res.send({ success, gateway: req.body });
     }
 
     /*DEVICE CONTROLLER*/
